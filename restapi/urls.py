@@ -16,7 +16,10 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import include, path
 
+from frontpage import views
+
 urlpatterns = [
+    path('', views.frontpage, name='frontpage'),
 	path('hypixel/', include('hypixel.urls')),
 	path('mojang/', include('mojang.urls')),
     path('admin/', admin.site.urls),

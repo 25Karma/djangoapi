@@ -11,4 +11,9 @@ handlers:
 # files defined.
 - url: /.*
   script: auto
+inbound_services:
+- warmup
+instance_class: F1
+automatic_scaling:
+  min_instances: 1
 # [END django_app]

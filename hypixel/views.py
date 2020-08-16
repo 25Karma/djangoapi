@@ -10,12 +10,12 @@ load_dotenv()
 KEY=os.getenv('HYPIXEL_SECRET_KEY')
 
 def default_responses(request):
+	json = request.json()
 	if request.status_code == 403:
 		return JsonResponse({
 			'success' : False,
 			'reason' : 'HYPIXEL_ACCESS_DENIED',
 			'cause' : json['cause'],
-			'uuid' : uuid,
 			})
 
 	if request.status_code >= 500:
