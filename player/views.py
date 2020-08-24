@@ -7,7 +7,7 @@ import hypixel.utilities as hypixel_utils
 
 # Create your views here.
 
-@ratelimit(key='ip', rate='20/m', block=True)
+@ratelimit(key='ip', rate='12/m', block=True)
 def player_stats_endpoint(request, slug):
 	if (request.method == 'GET'):
 		mojang = mojang_utils.get_player(slug)

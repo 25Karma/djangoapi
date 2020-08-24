@@ -1,10 +1,10 @@
 import requests
 
 def get_player(player):
-	r = requests.get('https://api.ashcon.app/mojang/v2/user/{player}'.format(player=player))
-	json = dict(r.json())
+	response = requests.get('https://api.ashcon.app/mojang/v2/user/{player}'.format(player=player))
+	json = dict(response.json())
 
-	if r.status_code == 200:
+	if response.status_code == 200:
 		return {
 			'success' : True,
 			'player' : {
@@ -13,13 +13,13 @@ def get_player(player):
 			}
 		}
 
-	if r.status_code == 400:
+	if response.status_code == 400:
 		return {
 			'success' : False,
 			'reason' : 'MOJANG_CALL_FAILED',
 		}
 
-	if r.status_code == 404:
+	if response.status_code == 404:
 		return {
 			'success' : False,
 			'reason' : 'MOJANG_PLAYER_DNE',

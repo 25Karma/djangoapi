@@ -7,15 +7,15 @@ load_dotenv()
 KEY = os.getenv('HYPIXEL_SECRET_KEY')
 
 def failed_responses(response):
-	json = request.json()
-	if request.status_code == 403:
+	json = response.json()
+	if response.status_code == 403:
 		return {
 			'success' : False,
 			'reason' : 'HYPIXEL_ACCESS_DENIED',
 			'cause' : json.get('cause'),
 			}
 
-	if request.status_code >= 500:
+	if response.status_code >= 500:
 		return {
 			'success' : False,
 			'reason' : 'HYPIXEL_API_DOWN',
