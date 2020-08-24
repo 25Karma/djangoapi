@@ -25,6 +25,9 @@ def failed_responses(response):
 		'reason' : 'UNKNOWN',
 	}
 
+# These functions make the calls to the Hypixel API, 
+# and directly return the data it receives
+
 def get_player(uuid):
 	response = requests.get('https://api.hypixel.net/player?key={key}&uuid={uuid}'.format(key=KEY, uuid=uuid))
 	json = dict(response.json())
@@ -35,7 +38,6 @@ def get_player(uuid):
 			return {
 				'success' : False,
 				'reason' : 'HYPIXEL_PLAYER_DNE',
-				'uuid' : uuid,
 				}
 	return failed_responses(response)
 
@@ -60,7 +62,9 @@ def get_guild(uuid):
 		return json
 	return failed_responses(response)
 
-def filter_player(json):
+# These functions are for reducing the size of the JSON before we send it over
+
+def reduce_player(json):
 	raw_player_data = json.get('player')
 	if (json.get('success') == True and raw_player_data != None):
 		return {
@@ -68,5 +72,25 @@ def filter_player(json):
 			'player' : {
 				key: raw_player_data.get(key) for key in player_filter if raw_player_data.get(key) != None
 			},
+		}
+	return json
+
+def reduce_friends(json):
+	raw_friends_data = json.get('records')
+	if (json.get('success') == True and raw_friends_data != None):
+		return {
+			'success': True,
+			'friendCount' : len(raw_friends_data),
+		}
+	return json
+
+
+def reduce_guild(json):
+	guild = json.get('guild')
+	if (json.get('success') == True and guild != None):
+		guild['members'] = len(guild.get('members'))
+		return {
+			'success': True,
+			'guild' : guild,
 		}
 	return json
