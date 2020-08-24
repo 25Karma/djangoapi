@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     'frontpage',
     'hypixel',
     'mojang',
+    'player',
 ]
 
 MIDDLEWARE = [
@@ -57,15 +58,17 @@ MIDDLEWARE = [
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
+    'ratelimit.middleware.RatelimitMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
 CORS_ORIGIN_WHITELIST = [
     "https://25karma.github.io",
     "http://localhost:3000",
-    "http://localhost:8080",
     "http://127.0.0.1:9000"
 ]
+
+RATELIMIT_VIEW = 'restapi.views.ratelimited_endpoint'
 
 ROOT_URLCONF = 'restapi.urls'
 

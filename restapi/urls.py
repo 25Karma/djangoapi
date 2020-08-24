@@ -22,5 +22,6 @@ urlpatterns = [
     path('', views.frontpage, name='frontpage'),
 	path('hypixel/', include('hypixel.urls')),
 	path('mojang/', include('mojang.urls')),
+    path('player/', include('player.urls')),
     path('admin/', admin.site.urls),
 ]
