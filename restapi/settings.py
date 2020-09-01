@@ -26,11 +26,11 @@ load_dotenv()
 SECRET_KEY = os.getenv('DJANGO_SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = [
     '127.0.0.1',
-    'karma-25.uc.r.appspot.com',
+    '.karma-25.uc.r.appspot.com',
 ]
 
 
